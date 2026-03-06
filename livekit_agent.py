@@ -6,6 +6,9 @@ from PiperTTSPlugin import PiperTTSPlugin
 from livekit import agents
 from livekit.agents import AgentSession, Agent
 from livekit.plugins import openai, silero
+# from livekit.plugins.silero import STT as SileroSTT
+
+from whisperlivekit import STT as WhisperLiveSTT
 
 # Load the LiveKit credentials from your .env file
 load_dotenv()
@@ -23,8 +26,8 @@ async def entrypoint(ctx: agents.JobContext):
 
     # Initialize the AgentSession using our local tools
     session = AgentSession(
-        vad=silero.VAD.load(),
-        stt=silero.STT(),
+        vad=silero.VAD.load(),# Connect to your local WLK server running on port 8000
+        stt=WhisperLiveSTT(url="ws://127.0.0.1:8000/asr"),
         # LLM via Ollama API
         llm=openai.LLM.with_ollama(
             model="llama3.1", # Match the model from your Ollama run
