@@ -18,7 +18,7 @@ We use LiveKit's development server to handle real-time audio and text sockets l
    ```bash
    livekit-server-dev
 
-```
+   ```
 
 2. Leave this terminal running in the background.
 
@@ -93,7 +93,7 @@ To avoid browser security blocks (Mixed Content errors) when testing WebRTC loca
 
 1. Clone the playground repository into a new folder:
 ```bash
-git clone [https://github.com/livekit/agents-playground.git](https://github.com/livekit/agents-playground.git)
+git clone https://github.com/livekit/agents-playground.git
 cd agents-playground
 npm install
 
