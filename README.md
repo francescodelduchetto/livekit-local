@@ -69,14 +69,14 @@ pip install "livekit-agents[openai]~=1.0" python-dotenv
 
 3. Create a `.env` file in the same folder as your Python script with the following exact values:
 ```text
-LIVEKIT_URL=[http://127.0.0.1:7880](http://127.0.0.1:7880)
+LIVEKIT_URL=ws://127.0.0.1:7880
 LIVEKIT_API_KEY=devkey
 LIVEKIT_API_SECRET=secret
 
 ```
 
 
-*(Note: We use `http://127.0.0.1` instead of `localhost` or `ws://` to prevent IPv6 resolution bugs and local SSL errors).*
+*(Note: We use `ws://127.0.0.1` instead of `localhost` or `ws://` to prevent IPv6 resolution bugs and local SSL errors).*
 4. Start the Python worker:
 ```bash
 python agent.py dev
