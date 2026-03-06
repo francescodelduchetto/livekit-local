@@ -1,6 +1,8 @@
 import logging
 from dotenv import load_dotenv
 
+from PiperTTSPlugin import PiperTTSPlugin
+
 from livekit import agents
 from livekit.agents import AgentSession, Agent
 from livekit.plugins import openai, silero
@@ -22,14 +24,14 @@ async def entrypoint(ctx: agents.JobContext):
     # Initialize the AgentSession using our local tools
     session = AgentSession(
         vad=silero.VAD.load(),
+        stt=silero.STT(),
         # LLM via Ollama API
         llm=openai.LLM.with_ollama(
-            model="llama3:13b", # Match the model from your Ollama run
-            base_url="http://localhost:11434/v1"
+            model="llama3.1", # Match the model from your Ollama run
+            base_url="http://127.0.0.1:11434/v1"
         ),
-        # NOTE: To make this a true "Voice" assistant, you need to add STT and TTS plugins here.
-        # The tutorial skipped them in the LiveKit snippet because fully local STT/TTS 
-        # requires extra setup in LiveKit (e.g., local Whisper server).
+        # Point it to the local model files you downloaded
+        tts=PiperTTSPlugin(model="models/en_GB-alan-medium.onnx"), 
     )
     
     # Start the session and greet the user
